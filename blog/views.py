@@ -4,6 +4,7 @@ from django.shortcuts import render, reverse, redirect
 from django.urls.base import reverse_lazy
 from django.views.decorators.http import require_http_methods, require_POST, require_GET
 from django.core.paginator import Paginator
+from django.contrib.auth import update_session_auth_hash
 
 from blog.forms import PubBlogForm
 from blog.models import BlogCategory, Blog, BlogComment
@@ -85,3 +86,33 @@ def search_blog(request):
             "search_query": query
         })
     return redirect('blog:index')
+
+
+@login_required
+def profile(request):
+    return render(request, "profile.html", {
+        "user": request.user
+    })
+
+
+@login_required
+def settings(request):
+    if request.method == "POST":
+        old_password = request.POST.get("old_password")
+        new_password = request.POST.get("new_password")
+        confirm_password = request.POST.get("confirm_password")
+
+        if not request.user.check_password(old_password):
+            return render(request, "settings.html", {"error": "Current password is incorrect"})
+
+        if new_password != confirm_password:
+            return render(request, "settings.html", {"error": "New passwords do not match"})
+
+        request.user.set_password(new_password)
+        request.user.save()
+
+        update_session_auth_hash(request, request.user)
+
+        return render(request, "settings.html", {"success": "Password updated successfully"})
+
+    return render(request, "settings.html")
