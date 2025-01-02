@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Blog{% endblock %}
+
+{% block head %}
+    <script src="{% static 'wangeditor/index.js' %}"></script>
+    <link href="{% static 'wangeditor/style.css' %}" rel="stylesheet">
+    <script src="{% static 'js/pub_blog.js' %}"></script>
+    <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/pub_blog.css' %}">
+{% endblock %}
+
+{% block main %}
+    <h1>Blog Release</h1>
+    <div class="mt-3">
+        <form action="" method="post">
+        {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="title" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select name="category" class="form-select" id="category-id">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Content</label>
+                <div id="editor—wrapper">
+                    <div id="toolbar-container"><!-- 工具栏 --></div>
+                    <div id="editor-container"><!-- 编辑器 --></div>
+                </div>
+            </div>
+            <div class="mb-3 text-end">
+                <button class="btn btn-primary" id="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

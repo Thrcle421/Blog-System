@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap5/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap5/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+<header class="p-3 text-bg-light border-bottom mb-3">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img src="{% static 'image/1.jpg ' %}" alt="" height="40">
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                <li><a href="#" class="nav-link px-2 text-dark">Blogs</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+            </form>
+
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-dark me-2">Login</button>
+                <button type="button" class="btn btn-warning">Sign-up</button>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="container bg-white p-3 rounded">
+    <h1>Blog Title</h1>
+    <hr>
+    <div class="mt-2">
+        <img src="{% static 'image/2.jpg' %}" class="rounded-circle" alt="" height="30">
+        <span class="ms-2">Thrcle</span>
+        <span class="ms-2">Time</span>
+    </div>
+    <hr>
+    <div class="py-2">
+        Detail
+    </div>
+    <hr>
+    <div class="mt-2">
+        <h3>Comments</h3>
+        <form action="" method="post">
+            <div class="mt-2">
+                <input type="text" class="form-control" placeholder="Please input your comment">
+            </div>
+            <div class="text-end mt-2">
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        <div class="mt-2">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item mb-3">
+                    <div class="d-flex justify-content-between text-body-secondary">
+                        <div class="user-info">
+                            <img src="{% static 'image/2.jpg' %}" class="rounded-circle" alt="" height="30">
+                            <span class="ms-2">Thrcle</span>
+                        </div>
+                        <div class="create-time align-self-center">
+                            Time
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        It is good!
+                    </div>
+                </li>
+                <li class="list-group-item mb-3">
+                    <div class="d-flex justify-content-between text-body-secondary">
+                        <div class="user-info">
+                            <img src="{% static 'image/2.jpg' %}" class="rounded-circle" alt="" height="30">
+                            <span class="ms-2">Thrcle</span>
+                        </div>
+                        <div class="create-time align-self-center">
+                            Time
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        It is good!
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</main>
+</body>
+</html>
