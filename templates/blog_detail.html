@@ -13,7 +13,7 @@
     <div class="mt-2">
         <img src="{% static 'image/2.jpg' %}" class="rounded-circle" alt="" height="30">
         <span class="ms-2">{{ blog.author }}</span>
-        <span class="ms-2">{{ blog.pub_time|date:"M d, Y" }}</span>
+        <span class="ms-2">{{ blog.pub_time|date:"M d, Y H:i" }}</span>
     </div>
     <hr>
     <div class="py-2">
@@ -46,7 +46,7 @@
                                     <img src="{% static 'image/2.jpg' %}" class="rounded-circle me-2" alt="" height="30">
                                     <span class="fw-bold">{{ comment.author.username }}</span>
                                 </div>
-                                <small class="text-muted">{{ comment.pub_time|date:"M d, Y" }}</small>
+                                <small class="text-muted">{{ comment.pub_time|date:"M d, Y H:i" }}</small>
                             </div>
                             <p class="mt-2 mb-0">{{ comment.content }}</p>
                         </div>
