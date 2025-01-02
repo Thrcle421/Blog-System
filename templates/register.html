@@ -1,40 +1,76 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Register{% endblock %}
 
-{% block head %}
-    <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
-    <script src="{% static 'js/register.js' %}"></script>
-{% endblock %}
-
 {% block main %}
-    <div style="max-width: 330px;" class="m-auto">
-        <h1>Register</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Username">
-            </div>
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Email">
-            </div>
-            <div class="mb-3">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="mb-3">
-                <label>Validation</label>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Validation" name="validation"
-                           aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="validation-btn">Obtain</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-transparent border-0 text-center pt-4">
+                    <h3>Create Account</h3>
+                    <p class="text-muted">Enter your details to register</p>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <img src="{% if form.instance.avatar and form.instance.avatar.url %}{{ form.instance.avatar.url }}{% else %}{% static 'image/default-avatar.png' %}{% endif %}" 
+                             class="rounded-circle mx-auto d-block mb-3"
+                             style="width: 100px; height: 100px; object-fit: cover;"
+                             id="avatar-preview" 
+                             alt="Avatar preview">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" name="confirm_password" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Profile Picture</label>
+                            <input type="file" name="avatar" class="form-control" accept="image/*">
+                            <div class="form-text">Choose a profile picture (optional)</div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Create Account</button>
+                        </div>
+                        
+                        <p class="text-center mt-3">
+                            Already have an account? <a href="{% url 'blogauth:login' %}">Sign in</a>
+                        </p>
+                    </form>
                 </div>
             </div>
-            <div class="mb-3">
-                <button class="btn btn-primary w-100">Register Now</button>
-            </div>
-        </form>
+        </div>
     </div>
+</div>
+
+<script>
+document.querySelector('input[name="avatar"]').addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('avatar-preview').src = e.target.result;
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+});
+</script>
 {% endblock %}

@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "blog",
-    "blogauth",
+    "blog.apps.BlogConfig",
+    "blogauth.apps.BlogauthConfig",
 ]
 
 MIDDLEWARE = [
@@ -110,10 +110,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# Change timezone to Los Angeles
+TIME_ZONE = "America/Los_Angeles"
 
 USE_I18N = True
 
+# Make sure this is True to use timezone-aware datetimes
 USE_TZ = True
 
 
@@ -141,4 +143,8 @@ DEFAULT_FROM_EMAIL = 'xuziming4211@gmail.com'
 
 LOGIN_URL = '/auth/login'
 
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
+AUTH_USER_MODEL = 'blog.User'

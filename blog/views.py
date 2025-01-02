@@ -116,3 +116,11 @@ def settings(request):
         return render(request, "settings.html", {"success": "Password updated successfully"})
 
     return render(request, "settings.html")
+
+
+@login_required
+def update_avatar(request):
+    if request.method == 'POST' and request.FILES.get('avatar'):
+        request.user.avatar = request.FILES['avatar']
+        request.user.save()
+    return redirect('blog:settings')
